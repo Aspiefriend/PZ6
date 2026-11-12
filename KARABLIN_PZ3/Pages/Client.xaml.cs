@@ -12,17 +12,21 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using PZ6.Models;
 
-namespace KARABLIN_PZ3.Pages
+namespace PZ6.Pages
 {
     /// <summary>
     /// Логика взаимодействия для Client.xaml
     /// </summary>
     public partial class Client : Page
     {
-        public Client(object parametr)
+        public Client(Accounts account, string role)
         {
             InitializeComponent();
+            if (account != null) {
+                Welcome.Text = $"Привет {account.login}.Вы вошли как {role}";
+            }
         }
     }
 }

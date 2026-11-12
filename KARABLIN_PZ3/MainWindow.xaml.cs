@@ -13,7 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace KARABLIN_PZ3
+namespace PZ6
 {
     /// <summary>
     /// Логика взаимодействия для MainWindow.xaml

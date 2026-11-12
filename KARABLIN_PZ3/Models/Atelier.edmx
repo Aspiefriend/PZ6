@@ -1,0 +1,1502 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="Хранилище ateilerModel" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="AccountRoles">
+          <Key>
+            <PropertyRef Name="id_account_role" />
+          </Key>
+          <Property Name="id_account_role" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="id_account" Type="int" Nullable="false" />
+          <Property Name="id_role" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Accounts">
+          <Key>
+            <PropertyRef Name="id_account" />
+          </Key>
+          <Property Name="id_account" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="login" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="password_hash" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="created_at" Type="datetime" Nullable="false" />
+          <Property Name="is_active" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Categories">
+          <Key>
+            <PropertyRef Name="id_category" />
+          </Key>
+          <Property Name="id_category" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="category_name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="category_description" Type="nvarchar" MaxLength="250" />
+        </EntityType>
+        <EntityType Name="Clients">
+          <Key>
+            <PropertyRef Name="id_client" />
+          </Key>
+          <Property Name="id_client" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="id_account" Type="int" Nullable="false" />
+          <Property Name="name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="surname" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="patronymic" Type="nvarchar" MaxLength="50" />
+          <Property Name="phone_number" Type="nvarchar" MaxLength="11" />
+          <Property Name="email" Type="nvarchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="CustomModels">
+          <Key>
+            <PropertyRef Name="id_custom_model" />
+          </Key>
+          <Property Name="id_custom_model" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="id_client" Type="int" Nullable="false" />
+          <Property Name="description" Type="nvarchar" MaxLength="1000" Nullable="false" />
+          <Property Name="references_image" Type="nvarchar" MaxLength="255" />
+          <Property Name="created_at" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Employees">
+          <Key>
+            <PropertyRef Name="id_employee" />
+          </Key>
+          <Property Name="id_employee" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="id_account" Type="int" Nullable="false" />
+          <Property Name="name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="surname" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="patronymic" Type="nvarchar" MaxLength="50" />
+          <Property Name="phone_number" Type="nvarchar" MaxLength="11" />
+          <Property Name="email" Type="nvarchar" MaxLength="100" />
+          <Property Name="id_workshop" Type="int" />
+          <Property Name="id_position" Type="int" Nullable="false" />
+          <Property Name="hire_date" Type="date" />
+          <Property Name="is_active" Type="bit" />
+        </EntityType>
+        <EntityType Name="Fittings">
+          <Key>
+            <PropertyRef Name="id_fitting" />
+          </Key>
+          <Property Name="id_fitting" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="id_order" Type="int" Nullable="false" />
+          <Property Name="fitting_date" Type="datetime" Nullable="false" />
+          <Property Name="notes" Type="nvarchar" MaxLength="200" />
+          <Property Name="is_done" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Materials">
+          <Key>
+            <PropertyRef Name="id_material" />
+          </Key>
+          <Property Name="id_material" Type="int" Nullable="false" />
+          <Property Name="material_name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="id_type_material" Type="int" Nullable="false" />
+          <Property Name="color" Type="nvarchar" MaxLength="30" />
+          <Property Name="strenght" Type="nvarchar" MaxLength="30" />
+          <Property Name="unit_of_measure" Type="nvarchar" MaxLength="10" Nullable="false" />
+          <Property Name="price_per_unit" Type="decimal" Precision="10" Scale="2" Nullable="false" />
+          <Property Name="quantity_in_stock" Type="decimal" Precision="10" Scale="2" Nullable="false" />
+          <Property Name="image_path" Type="nvarchar" MaxLength="255" />
+        </EntityType>
+        <EntityType Name="Models">
+          <Key>
+            <PropertyRef Name="id_model" />
+          </Key>
+          <Property Name="id_model" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="id_category" Type="int" Nullable="false" />
+          <Property Name="model_name" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="base_price" Type="decimal" Precision="10" Scale="2" Nullable="false" />
+          <Property Name="description" Type="nvarchar" MaxLength="500" />
+          <Property Name="estimated_days" Type="int" />
+          <Property Name="image_path" Type="nvarchar" MaxLength="255" />
+        </EntityType>
+        <EntityType Name="OrderEmployees">
+          <Key>
+            <PropertyRef Name="id_order_employee" />
+          </Key>
+          <Property Name="id_order_employee" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="id_order" Type="int" Nullable="false" />
+          <Property Name="id_employee" Type="int" Nullable="false" />
+          <Property Name="id_role_for_orders" Type="int" Nullable="false" />
+          <Property Name="is_responsible" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="OrderMaterials">
+          <Key>
+            <PropertyRef Name="id_order_material" />
+          </Key>
+          <Property Name="id_order_material" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="id_order" Type="int" Nullable="false" />
+          <Property Name="id_material" Type="int" Nullable="false" />
+          <Property Name="quantity" Type="decimal" Precision="10" Scale="2" Nullable="false" />
+          <Property Name="price_at_moment" Type="decimal" Precision="10" Scale="2" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Orders">
+          <Key>
+            <PropertyRef Name="id_order" />
+          </Key>
+          <Property Name="id_order" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="id_client" Type="int" Nullable="false" />
+          <Property Name="id_model" Type="int" />
+          <Property Name="id_custom_model" Type="int" />
+          <Property Name="id_status" Type="int" Nullable="false" />
+          <Property Name="created_at" Type="datetime" Nullable="false" />
+          <Property Name="deadline" Type="date" Nullable="false" />
+          <Property Name="is_urgent" Type="bit" Nullable="false" />
+          <Property Name="total_price" Type="decimal" Precision="10" Scale="2" Nullable="false" />
+          <Property Name="notes" Type="nvarchar" MaxLength="500" />
+        </EntityType>
+        <EntityType Name="OrderStatusHistory">
+          <Key>
+            <PropertyRef Name="id_history" />
+          </Key>
+          <Property Name="id_history" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="id_order" Type="int" Nullable="false" />
+          <Property Name="id_status" Type="int" Nullable="false" />
+          <Property Name="changed_at" Type="datetime" Nullable="false" />
+          <Property Name="id_employee" Type="int" />
+          <Property Name="comment" Type="nvarchar" MaxLength="200" />
+        </EntityType>
+        <EntityType Name="Payments">
+          <Key>
+            <PropertyRef Name="id_payment" />
+          </Key>
+          <Property Name="id_payment" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="id_order" Type="int" Nullable="false" />
+          <Property Name="payment_type" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="amount" Type="decimal" Precision="10" Scale="2" Nullable="false" />
+          <Property Name="payment_date" Type="datetime" Nullable="false" />
+          <Property Name="notes" Type="nvarchar" MaxLength="200" />
+        </EntityType>
+        <EntityType Name="Positions">
+          <Key>
+            <PropertyRef Name="id_position" />
+          </Key>
+          <Property Name="id_position" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="position_name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="salary" Type="decimal" Precision="12" Scale="0" Nullable="false" />
+          <Property Name="position_description" Type="nvarchar" MaxLength="150" />
+        </EntityType>
+        <EntityType Name="Roles">
+          <Key>
+            <PropertyRef Name="id_role" />
+          </Key>
+          <Property Name="id_role" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="role_name" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="RolesForOrders">
+          <Key>
+            <PropertyRef Name="id_role_for_orders" />
+          </Key>
+          <Property Name="id_role_for_orders" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="role_for_orders_name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="description" Type="nvarchar" MaxLength="200" />
+        </EntityType>
+        <EntityType Name="Statuses">
+          <Key>
+            <PropertyRef Name="id_status" />
+          </Key>
+          <Property Name="id_status" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="status_name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="status_description" Type="nvarchar" MaxLength="150" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
+        <EntityType Name="TypesMaterials">
+          <Key>
+            <PropertyRef Name="id_type_material" />
+          </Key>
+          <Property Name="id_type_material" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="type_name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="type_description" Type="nvarchar" MaxLength="250" />
+        </EntityType>
+        <EntityType Name="Workshops">
+          <Key>
+            <PropertyRef Name="id_workshop" />
+          </Key>
+          <Property Name="id_workshop" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="workshop_name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="description" Type="nvarchar" MaxLength="200" />
+        </EntityType>
+        <Association Name="FK__AccountRo__id_ac__32AB8735">
+          <End Role="Accounts" Type="Self.Accounts" Multiplicity="1" />
+          <End Role="AccountRoles" Type="Self.AccountRoles" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Accounts">
+              <PropertyRef Name="id_account" />
+            </Principal>
+            <Dependent Role="AccountRoles">
+              <PropertyRef Name="id_account" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__AccountRo__id_ro__339FAB6E">
+          <End Role="Roles" Type="Self.Roles" Multiplicity="1" />
+          <End Role="AccountRoles" Type="Self.AccountRoles" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Roles">
+              <PropertyRef Name="id_role" />
+            </Principal>
+            <Dependent Role="AccountRoles">
+              <PropertyRef Name="id_role" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__CustomMod__id_cl__6B24EA82">
+          <End Role="Clients" Type="Self.Clients" Multiplicity="1" />
+          <End Role="CustomModels" Type="Self.CustomModels" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Clients">
+              <PropertyRef Name="id_client" />
+            </Principal>
+            <Dependent Role="CustomModels">
+              <PropertyRef Name="id_client" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Fittings__id_ord__1AD3FDA4">
+          <End Role="Orders" Type="Self.Orders" Multiplicity="1" />
+          <End Role="Fittings" Type="Self.Fittings" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Orders">
+              <PropertyRef Name="id_order" />
+            </Principal>
+            <Dependent Role="Fittings">
+              <PropertyRef Name="id_order" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Models__id_categ__68487DD7">
+          <End Role="Categories" Type="Self.Categories" Multiplicity="1" />
+          <End Role="Models" Type="Self.Models" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Categories">
+              <PropertyRef Name="id_category" />
+            </Principal>
+            <Dependent Role="Models">
+              <PropertyRef Name="id_category" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__OrderEmpl__id_or__04E4BC85">
+          <End Role="Orders" Type="Self.Orders" Multiplicity="1" />
+          <End Role="OrderEmployees" Type="Self.OrderEmployees" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Orders">
+              <PropertyRef Name="id_order" />
+            </Principal>
+            <Dependent Role="OrderEmployees">
+              <PropertyRef Name="id_order" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__OrderEmpl__id_ro__06CD04F7">
+          <End Role="RolesForOrders" Type="Self.RolesForOrders" Multiplicity="1" />
+          <End Role="OrderEmployees" Type="Self.OrderEmployees" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="RolesForOrders">
+              <PropertyRef Name="id_role_for_orders" />
+            </Principal>
+            <Dependent Role="OrderEmployees">
+              <PropertyRef Name="id_role_for_orders" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__OrderMate__id_ma__7F2BE32F">
+          <End Role="Materials" Type="Self.Materials" Multiplicity="1" />
+          <End Role="OrderMaterials" Type="Self.OrderMaterials" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Materials">
+              <PropertyRef Name="id_material" />
+            </Principal>
+            <Dependent Role="OrderMaterials">
+              <PropertyRef Name="id_material" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__OrderMate__id_or__7E37BEF6">
+          <End Role="Orders" Type="Self.Orders" Multiplicity="1" />
+          <End Role="OrderMaterials" Type="Self.OrderMaterials" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Orders">
+              <PropertyRef Name="id_order" />
+            </Principal>
+            <Dependent Role="OrderMaterials">
+              <PropertyRef Name="id_order" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Orders__id_clien__6EF57B66">
+          <End Role="Clients" Type="Self.Clients" Multiplicity="1" />
+          <End Role="Orders" Type="Self.Orders" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Clients">
+              <PropertyRef Name="id_client" />
+            </Principal>
+            <Dependent Role="Orders">
+              <PropertyRef Name="id_client" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Orders__id_custo__70DDC3D8">
+          <End Role="CustomModels" Type="Self.CustomModels" Multiplicity="0..1" />
+          <End Role="Orders" Type="Self.Orders" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CustomModels">
+              <PropertyRef Name="id_custom_model" />
+            </Principal>
+            <Dependent Role="Orders">
+              <PropertyRef Name="id_custom_model" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Orders__id_model__6FE99F9F">
+          <End Role="Models" Type="Self.Models" Multiplicity="0..1" />
+          <End Role="Orders" Type="Self.Orders" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Models">
+              <PropertyRef Name="id_model" />
+            </Principal>
+            <Dependent Role="Orders">
+              <PropertyRef Name="id_model" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Orders__id_statu__71D1E811">
+          <End Role="Statuses" Type="Self.Statuses" Multiplicity="1" />
+          <End Role="Orders" Type="Self.Orders" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Statuses">
+              <PropertyRef Name="id_status" />
+            </Principal>
+            <Dependent Role="Orders">
+              <PropertyRef Name="id_status" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__OrderStat__id_or__151B244E">
+          <End Role="Orders" Type="Self.Orders" Multiplicity="1" />
+          <End Role="OrderStatusHistory" Type="Self.OrderStatusHistory" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Orders">
+              <PropertyRef Name="id_order" />
+            </Principal>
+            <Dependent Role="OrderStatusHistory">
+              <PropertyRef Name="id_order" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__OrderStat__id_st__160F4887">
+          <End Role="Statuses" Type="Self.Statuses" Multiplicity="1" />
+          <End Role="OrderStatusHistory" Type="Self.OrderStatusHistory" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Statuses">
+              <PropertyRef Name="id_status" />
+            </Principal>
+            <Dependent Role="OrderStatusHistory">
+              <PropertyRef Name="id_status" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Payments__id_ord__10566F31">
+          <End Role="Orders" Type="Self.Orders" Multiplicity="1" />
+          <End Role="Payments" Type="Self.Payments" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Orders">
+              <PropertyRef Name="id_order" />
+            </Principal>
+            <Dependent Role="Payments">
+              <PropertyRef Name="id_order" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Clients_Accounts">
+          <End Role="Accounts" Type="Self.Accounts" Multiplicity="1" />
+          <End Role="Clients" Type="Self.Clients" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Accounts">
+              <PropertyRef Name="id_account" />
+            </Principal>
+            <Dependent Role="Clients">
+              <PropertyRef Name="id_account" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Clients_Accounts1">
+          <End Role="Accounts" Type="Self.Accounts" Multiplicity="1" />
+          <End Role="Clients" Type="Self.Clients" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Accounts">
+              <PropertyRef Name="id_account" />
+            </Principal>
+            <Dependent Role="Clients">
+              <PropertyRef Name="id_account" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Employees_Accounts">
+          <End Role="Accounts" Type="Self.Accounts" Multiplicity="1" />
+          <End Role="Employees" Type="Self.Employees" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Accounts">
+              <PropertyRef Name="id_account" />
+            </Principal>
+            <Dependent Role="Employees">
+              <PropertyRef Name="id_account" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Employees_Positions">
+          <End Role="Positions" Type="Self.Positions" Multiplicity="1" />
+          <End Role="Employees" Type="Self.Employees" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Positions">
+              <PropertyRef Name="id_position" />
+            </Principal>
+            <Dependent Role="Employees">
+              <PropertyRef Name="id_position" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Employees_Workshops">
+          <End Role="Workshops" Type="Self.Workshops" Multiplicity="0..1" />
+          <End Role="Employees" Type="Self.Employees" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Workshops">
+              <PropertyRef Name="id_workshop" />
+            </Principal>
+            <Dependent Role="Employees">
+              <PropertyRef Name="id_workshop" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Materials_TypesMaterials">
+          <End Role="TypesMaterials" Type="Self.TypesMaterials" Multiplicity="1" />
+          <End Role="Materials" Type="Self.Materials" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TypesMaterials">
+              <PropertyRef Name="id_type_material" />
+            </Principal>
+            <Dependent Role="Materials">
+              <PropertyRef Name="id_type_material" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Хранилище ateilerModelContainer">
+          <EntitySet Name="AccountRoles" EntityType="Self.AccountRoles" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Accounts" EntityType="Self.Accounts" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Categories" EntityType="Self.Categories" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Clients" EntityType="Self.Clients" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CustomModels" EntityType="Self.CustomModels" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Employees" EntityType="Self.Employees" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Fittings" EntityType="Self.Fittings" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Materials" EntityType="Self.Materials" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Models" EntityType="Self.Models" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="OrderEmployees" EntityType="Self.OrderEmployees" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="OrderMaterials" EntityType="Self.OrderMaterials" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Orders" EntityType="Self.Orders" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="OrderStatusHistory" EntityType="Self.OrderStatusHistory" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Payments" EntityType="Self.Payments" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Positions" EntityType="Self.Positions" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Roles" EntityType="Self.Roles" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="RolesForOrders" EntityType="Self.RolesForOrders" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Statuses" EntityType="Self.Statuses" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TypesMaterials" EntityType="Self.TypesMaterials" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Workshops" EntityType="Self.Workshops" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__AccountRo__id_ac__32AB8735" Association="Self.FK__AccountRo__id_ac__32AB8735">
+            <End Role="Accounts" EntitySet="Accounts" />
+            <End Role="AccountRoles" EntitySet="AccountRoles" />
+          </AssociationSet>
+          <AssociationSet Name="FK__AccountRo__id_ro__339FAB6E" Association="Self.FK__AccountRo__id_ro__339FAB6E">
+            <End Role="Roles" EntitySet="Roles" />
+            <End Role="AccountRoles" EntitySet="AccountRoles" />
+          </AssociationSet>
+          <AssociationSet Name="FK__CustomMod__id_cl__6B24EA82" Association="Self.FK__CustomMod__id_cl__6B24EA82">
+            <End Role="Clients" EntitySet="Clients" />
+            <End Role="CustomModels" EntitySet="CustomModels" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Fittings__id_ord__1AD3FDA4" Association="Self.FK__Fittings__id_ord__1AD3FDA4">
+            <End Role="Orders" EntitySet="Orders" />
+            <End Role="Fittings" EntitySet="Fittings" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Models__id_categ__68487DD7" Association="Self.FK__Models__id_categ__68487DD7">
+            <End Role="Categories" EntitySet="Categories" />
+            <End Role="Models" EntitySet="Models" />
+          </AssociationSet>
+          <AssociationSet Name="FK__OrderEmpl__id_or__04E4BC85" Association="Self.FK__OrderEmpl__id_or__04E4BC85">
+            <End Role="Orders" EntitySet="Orders" />
+            <End Role="OrderEmployees" EntitySet="OrderEmployees" />
+          </AssociationSet>
+          <AssociationSet Name="FK__OrderEmpl__id_ro__06CD04F7" Association="Self.FK__OrderEmpl__id_ro__06CD04F7">
+            <End Role="RolesForOrders" EntitySet="RolesForOrders" />
+            <End Role="OrderEmployees" EntitySet="OrderEmployees" />
+          </AssociationSet>
+          <AssociationSet Name="FK__OrderMate__id_ma__7F2BE32F" Association="Self.FK__OrderMate__id_ma__7F2BE32F">
+            <End Role="Materials" EntitySet="Materials" />
+            <End Role="OrderMaterials" EntitySet="OrderMaterials" />
+          </AssociationSet>
+          <AssociationSet Name="FK__OrderMate__id_or__7E37BEF6" Association="Self.FK__OrderMate__id_or__7E37BEF6">
+            <End Role="Orders" EntitySet="Orders" />
+            <End Role="OrderMaterials" EntitySet="OrderMaterials" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Orders__id_clien__6EF57B66" Association="Self.FK__Orders__id_clien__6EF57B66">
+            <End Role="Clients" EntitySet="Clients" />
+            <End Role="Orders" EntitySet="Orders" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Orders__id_custo__70DDC3D8" Association="Self.FK__Orders__id_custo__70DDC3D8">
+            <End Role="CustomModels" EntitySet="CustomModels" />
+            <End Role="Orders" EntitySet="Orders" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Orders__id_model__6FE99F9F" Association="Self.FK__Orders__id_model__6FE99F9F">
+            <End Role="Models" EntitySet="Models" />
+            <End Role="Orders" EntitySet="Orders" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Orders__id_statu__71D1E811" Association="Self.FK__Orders__id_statu__71D1E811">
+            <End Role="Statuses" EntitySet="Statuses" />
+            <End Role="Orders" EntitySet="Orders" />
+          </AssociationSet>
+          <AssociationSet Name="FK__OrderStat__id_or__151B244E" Association="Self.FK__OrderStat__id_or__151B244E">
+            <End Role="Orders" EntitySet="Orders" />
+            <End Role="OrderStatusHistory" EntitySet="OrderStatusHistory" />
+          </AssociationSet>
+          <AssociationSet Name="FK__OrderStat__id_st__160F4887" Association="Self.FK__OrderStat__id_st__160F4887">
+            <End Role="Statuses" EntitySet="Statuses" />
+            <End Role="OrderStatusHistory" EntitySet="OrderStatusHistory" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Payments__id_ord__10566F31" Association="Self.FK__Payments__id_ord__10566F31">
+            <End Role="Orders" EntitySet="Orders" />
+            <End Role="Payments" EntitySet="Payments" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Clients_Accounts" Association="Self.FK_Clients_Accounts">
+            <End Role="Accounts" EntitySet="Accounts" />
+            <End Role="Clients" EntitySet="Clients" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Clients_Accounts1" Association="Self.FK_Clients_Accounts1">
+            <End Role="Accounts" EntitySet="Accounts" />
+            <End Role="Clients" EntitySet="Clients" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Employees_Accounts" Association="Self.FK_Employees_Accounts">
+            <End Role="Accounts" EntitySet="Accounts" />
+            <End Role="Employees" EntitySet="Employees" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Employees_Positions" Association="Self.FK_Employees_Positions">
+            <End Role="Positions" EntitySet="Positions" />
+            <End Role="Employees" EntitySet="Employees" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Employees_Workshops" Association="Self.FK_Employees_Workshops">
+            <End Role="Workshops" EntitySet="Workshops" />
+            <End Role="Employees" EntitySet="Employees" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Materials_TypesMaterials" Association="Self.FK_Materials_TypesMaterials">
+            <End Role="TypesMaterials" EntitySet="TypesMaterials" />
+            <End Role="Materials" EntitySet="Materials" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="ateilerModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="AccountRoles">
+          <Key>
+            <PropertyRef Name="id_account_role" />
+          </Key>
+          <Property Name="id_account_role" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="id_account" Type="Int32" Nullable="false" />
+          <Property Name="id_role" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Accounts" Relationship="Self.FK__AccountRo__id_ac__32AB8735" FromRole="AccountRoles" ToRole="Accounts" />
+          <NavigationProperty Name="Roles" Relationship="Self.FK__AccountRo__id_ro__339FAB6E" FromRole="AccountRoles" ToRole="Roles" />
+        </EntityType>
+        <EntityType Name="Accounts">
+          <Key>
+            <PropertyRef Name="id_account" />
+          </Key>
+          <Property Name="id_account" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="login" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="password_hash" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="created_at" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="is_active" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="AccountRoles" Relationship="Self.FK__AccountRo__id_ac__32AB8735" FromRole="Accounts" ToRole="AccountRoles" />
+          <NavigationProperty Name="Clients" Relationship="Self.FK_Clients_Accounts" FromRole="Accounts" ToRole="Clients" />
+          <NavigationProperty Name="Clients1" Relationship="Self.FK_Clients_Accounts1" FromRole="Accounts" ToRole="Clients" />
+          <NavigationProperty Name="Employees" Relationship="Self.FK_Employees_Accounts" FromRole="Accounts" ToRole="Employees" />
+        </EntityType>
+        <EntityType Name="Categories">
+          <Key>
+            <PropertyRef Name="id_category" />
+          </Key>
+          <Property Name="id_category" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="category_name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="category_description" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Models" Relationship="Self.FK__Models__id_categ__68487DD7" FromRole="Categories" ToRole="Models" />
+        </EntityType>
+        <EntityType Name="Clients">
+          <Key>
+            <PropertyRef Name="id_client" />
+          </Key>
+          <Property Name="id_client" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="id_account" Type="Int32" Nullable="false" />
+          <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="surname" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="patronymic" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="phone_number" Type="String" MaxLength="11" FixedLength="false" Unicode="true" />
+          <Property Name="email" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Accounts" Relationship="Self.FK_Clients_Accounts" FromRole="Clients" ToRole="Accounts" />
+          <NavigationProperty Name="Accounts1" Relationship="Self.FK_Clients_Accounts1" FromRole="Clients" ToRole="Accounts" />
+          <NavigationProperty Name="CustomModels" Relationship="Self.FK__CustomMod__id_cl__6B24EA82" FromRole="Clients" ToRole="CustomModels" />
+          <NavigationProperty Name="Orders" Relationship="Self.FK__Orders__id_clien__6EF57B66" FromRole="Clients" ToRole="Orders" />
+        </EntityType>
+        <EntityType Name="CustomModels">
+          <Key>
+            <PropertyRef Name="id_custom_model" />
+          </Key>
+          <Property Name="id_custom_model" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="id_client" Type="Int32" Nullable="false" />
+          <Property Name="description" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="references_image" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="created_at" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="Clients" Relationship="Self.FK__CustomMod__id_cl__6B24EA82" FromRole="CustomModels" ToRole="Clients" />
+          <NavigationProperty Name="Orders" Relationship="Self.FK__Orders__id_custo__70DDC3D8" FromRole="CustomModels" ToRole="Orders" />
+        </EntityType>
+        <EntityType Name="Employees">
+          <Key>
+            <PropertyRef Name="id_employee" />
+          </Key>
+          <Property Name="id_employee" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="id_account" Type="Int32" Nullable="false" />
+          <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="surname" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="patronymic" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="phone_number" Type="String" MaxLength="11" FixedLength="false" Unicode="true" />
+          <Property Name="email" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="id_workshop" Type="Int32" />
+          <Property Name="id_position" Type="Int32" Nullable="false" />
+          <Property Name="hire_date" Type="DateTime" Precision="0" />
+          <Property Name="is_active" Type="Boolean" />
+          <NavigationProperty Name="Accounts" Relationship="Self.FK_Employees_Accounts" FromRole="Employees" ToRole="Accounts" />
+          <NavigationProperty Name="Positions" Relationship="Self.FK_Employees_Positions" FromRole="Employees" ToRole="Positions" />
+          <NavigationProperty Name="Workshops" Relationship="Self.FK_Employees_Workshops" FromRole="Employees" ToRole="Workshops" />
+        </EntityType>
+        <EntityType Name="Fittings">
+          <Key>
+            <PropertyRef Name="id_fitting" />
+          </Key>
+          <Property Name="id_fitting" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="id_order" Type="Int32" Nullable="false" />
+          <Property Name="fitting_date" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="notes" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="is_done" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Orders" Relationship="Self.FK__Fittings__id_ord__1AD3FDA4" FromRole="Fittings" ToRole="Orders" />
+        </EntityType>
+        <EntityType Name="Materials">
+          <Key>
+            <PropertyRef Name="id_material" />
+          </Key>
+          <Property Name="id_material" Type="Int32" Nullable="false" />
+          <Property Name="material_name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="id_type_material" Type="Int32" Nullable="false" />
+          <Property Name="color" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="strenght" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="unit_of_measure" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="price_per_unit" Type="Decimal" Precision="10" Scale="2" Nullable="false" />
+          <Property Name="quantity_in_stock" Type="Decimal" Precision="10" Scale="2" Nullable="false" />
+          <Property Name="image_path" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="OrderMaterials" Relationship="Self.FK__OrderMate__id_ma__7F2BE32F" FromRole="Materials" ToRole="OrderMaterials" />
+          <NavigationProperty Name="TypesMaterials" Relationship="Self.FK_Materials_TypesMaterials" FromRole="Materials" ToRole="TypesMaterials" />
+        </EntityType>
+        <EntityType Name="Models">
+          <Key>
+            <PropertyRef Name="id_model" />
+          </Key>
+          <Property Name="id_model" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="id_category" Type="Int32" Nullable="false" />
+          <Property Name="model_name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="base_price" Type="Decimal" Precision="10" Scale="2" Nullable="false" />
+          <Property Name="description" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="estimated_days" Type="Int32" />
+          <Property Name="image_path" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Categories" Relationship="Self.FK__Models__id_categ__68487DD7" FromRole="Models" ToRole="Categories" />
+          <NavigationProperty Name="Orders" Relationship="Self.FK__Orders__id_model__6FE99F9F" FromRole="Models" ToRole="Orders" />
+        </EntityType>
+        <EntityType Name="OrderEmployees">
+          <Key>
+            <PropertyRef Name="id_order_employee" />
+          </Key>
+          <Property Name="id_order_employee" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="id_order" Type="Int32" Nullable="false" />
+          <Property Name="id_employee" Type="Int32" Nullable="false" />
+          <Property Name="id_role_for_orders" Type="Int32" Nullable="false" />
+          <Property Name="is_responsible" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Orders" Relationship="Self.FK__OrderEmpl__id_or__04E4BC85" FromRole="OrderEmployees" ToRole="Orders" />
+          <NavigationProperty Name="RolesForOrders" Relationship="Self.FK__OrderEmpl__id_ro__06CD04F7" FromRole="OrderEmployees" ToRole="RolesForOrders" />
+        </EntityType>
+        <EntityType Name="OrderMaterials">
+          <Key>
+            <PropertyRef Name="id_order_material" />
+          </Key>
+          <Property Name="id_order_material" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="id_order" Type="Int32" Nullable="false" />
+          <Property Name="id_material" Type="Int32" Nullable="false" />
+          <Property Name="quantity" Type="Decimal" Precision="10" Scale="2" Nullable="false" />
+          <Property Name="price_at_moment" Type="Decimal" Precision="10" Scale="2" Nullable="false" />
+          <NavigationProperty Name="Materials" Relationship="Self.FK__OrderMate__id_ma__7F2BE32F" FromRole="OrderMaterials" ToRole="Materials" />
+          <NavigationProperty Name="Orders" Relationship="Self.FK__OrderMate__id_or__7E37BEF6" FromRole="OrderMaterials" ToRole="Orders" />
+        </EntityType>
+        <EntityType Name="Orders">
+          <Key>
+            <PropertyRef Name="id_order" />
+          </Key>
+          <Property Name="id_order" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="id_client" Type="Int32" Nullable="false" />
+          <Property Name="id_model" Type="Int32" />
+          <Property Name="id_custom_model" Type="Int32" />
+          <Property Name="id_status" Type="Int32" Nullable="false" />
+          <Property Name="created_at" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="deadline" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="is_urgent" Type="Boolean" Nullable="false" />
+          <Property Name="total_price" Type="Decimal" Precision="10" Scale="2" Nullable="false" />
+          <Property Name="notes" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Clients" Relationship="Self.FK__Orders__id_clien__6EF57B66" FromRole="Orders" ToRole="Clients" />
+          <NavigationProperty Name="CustomModels" Relationship="Self.FK__Orders__id_custo__70DDC3D8" FromRole="Orders" ToRole="CustomModels" />
+          <NavigationProperty Name="Fittings" Relationship="Self.FK__Fittings__id_ord__1AD3FDA4" FromRole="Orders" ToRole="Fittings" />
+          <NavigationProperty Name="Models" Relationship="Self.FK__Orders__id_model__6FE99F9F" FromRole="Orders" ToRole="Models" />
+          <NavigationProperty Name="OrderEmployees" Relationship="Self.FK__OrderEmpl__id_or__04E4BC85" FromRole="Orders" ToRole="OrderEmployees" />
+          <NavigationProperty Name="OrderMaterials" Relationship="Self.FK__OrderMate__id_or__7E37BEF6" FromRole="Orders" ToRole="OrderMaterials" />
+          <NavigationProperty Name="Statuses" Relationship="Self.FK__Orders__id_statu__71D1E811" FromRole="Orders" ToRole="Statuses" />
+          <NavigationProperty Name="OrderStatusHistory" Relationship="Self.FK__OrderStat__id_or__151B244E" FromRole="Orders" ToRole="OrderStatusHistory" />
+          <NavigationProperty Name="Payments" Relationship="Self.FK__Payments__id_ord__10566F31" FromRole="Orders" ToRole="Payments" />
+        </EntityType>
+        <EntityType Name="OrderStatusHistory">
+          <Key>
+            <PropertyRef Name="id_history" />
+          </Key>
+          <Property Name="id_history" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="id_order" Type="Int32" Nullable="false" />
+          <Property Name="id_status" Type="Int32" Nullable="false" />
+          <Property Name="changed_at" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="id_employee" Type="Int32" />
+          <Property Name="comment" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Orders" Relationship="Self.FK__OrderStat__id_or__151B244E" FromRole="OrderStatusHistory" ToRole="Orders" />
+          <NavigationProperty Name="Statuses" Relationship="Self.FK__OrderStat__id_st__160F4887" FromRole="OrderStatusHistory" ToRole="Statuses" />
+        </EntityType>
+        <EntityType Name="Payments">
+          <Key>
+            <PropertyRef Name="id_payment" />
+          </Key>
+          <Property Name="id_payment" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="id_order" Type="Int32" Nullable="false" />
+          <Property Name="payment_type" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="amount" Type="Decimal" Precision="10" Scale="2" Nullable="false" />
+          <Property Name="payment_date" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="notes" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Orders" Relationship="Self.FK__Payments__id_ord__10566F31" FromRole="Payments" ToRole="Orders" />
+        </EntityType>
+        <EntityType Name="Positions">
+          <Key>
+            <PropertyRef Name="id_position" />
+          </Key>
+          <Property Name="id_position" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="position_name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="salary" Type="Decimal" Precision="12" Scale="0" Nullable="false" />
+          <Property Name="position_description" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Employees" Relationship="Self.FK_Employees_Positions" FromRole="Positions" ToRole="Employees" />
+        </EntityType>
+        <EntityType Name="Roles">
+          <Key>
+            <PropertyRef Name="id_role" />
+          </Key>
+          <Property Name="id_role" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="role_name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="AccountRoles" Relationship="Self.FK__AccountRo__id_ro__339FAB6E" FromRole="Roles" ToRole="AccountRoles" />
+        </EntityType>
+        <EntityType Name="RolesForOrders">
+          <Key>
+            <PropertyRef Name="id_role_for_orders" />
+          </Key>
+          <Property Name="id_role_for_orders" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="role_for_orders_name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="description" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="OrderEmployees" Relationship="Self.FK__OrderEmpl__id_ro__06CD04F7" FromRole="RolesForOrders" ToRole="OrderEmployees" />
+        </EntityType>
+        <EntityType Name="Statuses">
+          <Key>
+            <PropertyRef Name="id_status" />
+          </Key>
+          <Property Name="id_status" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="status_name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="status_description" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Orders" Relationship="Self.FK__Orders__id_statu__71D1E811" FromRole="Statuses" ToRole="Orders" />
+          <NavigationProperty Name="OrderStatusHistory" Relationship="Self.FK__OrderStat__id_st__160F4887" FromRole="Statuses" ToRole="OrderStatusHistory" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="TypesMaterials">
+          <Key>
+            <PropertyRef Name="id_type_material" />
+          </Key>
+          <Property Name="id_type_material" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="type_name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="type_description" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Materials" Relationship="Self.FK_Materials_TypesMaterials" FromRole="TypesMaterials" ToRole="Materials" />
+        </EntityType>
+        <EntityType Name="Workshops">
+          <Key>
+            <PropertyRef Name="id_workshop" />
+          </Key>
+          <Property Name="id_workshop" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="workshop_name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="description" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Employees" Relationship="Self.FK_Employees_Workshops" FromRole="Workshops" ToRole="Employees" />
+        </EntityType>
+        <Association Name="FK__AccountRo__id_ac__32AB8735">
+          <End Role="Accounts" Type="Self.Accounts" Multiplicity="1" />
+          <End Role="AccountRoles" Type="Self.AccountRoles" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Accounts">
+              <PropertyRef Name="id_account" />
+            </Principal>
+            <Dependent Role="AccountRoles">
+              <PropertyRef Name="id_account" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__AccountRo__id_ro__339FAB6E">
+          <End Role="Roles" Type="Self.Roles" Multiplicity="1" />
+          <End Role="AccountRoles" Type="Self.AccountRoles" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Roles">
+              <PropertyRef Name="id_role" />
+            </Principal>
+            <Dependent Role="AccountRoles">
+              <PropertyRef Name="id_role" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Clients_Accounts">
+          <End Role="Accounts" Type="Self.Accounts" Multiplicity="1" />
+          <End Role="Clients" Type="Self.Clients" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Accounts">
+              <PropertyRef Name="id_account" />
+            </Principal>
+            <Dependent Role="Clients">
+              <PropertyRef Name="id_account" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Clients_Accounts1">
+          <End Role="Accounts" Type="Self.Accounts" Multiplicity="1" />
+          <End Role="Clients" Type="Self.Clients" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Accounts">
+              <PropertyRef Name="id_account" />
+            </Principal>
+            <Dependent Role="Clients">
+              <PropertyRef Name="id_account" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Employees_Accounts">
+          <End Role="Accounts" Type="Self.Accounts" Multiplicity="1" />
+          <End Role="Employees" Type="Self.Employees" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Accounts">
+              <PropertyRef Name="id_account" />
+            </Principal>
+            <Dependent Role="Employees">
+              <PropertyRef Name="id_account" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Models__id_categ__68487DD7">
+          <End Role="Categories" Type="Self.Categories" Multiplicity="1" />
+          <End Role="Models" Type="Self.Models" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Categories">
+              <PropertyRef Name="id_category" />
+            </Principal>
+            <Dependent Role="Models">
+              <PropertyRef Name="id_category" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__CustomMod__id_cl__6B24EA82">
+          <End Role="Clients" Type="Self.Clients" Multiplicity="1" />
+          <End Role="CustomModels" Type="Self.CustomModels" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Clients">
+              <PropertyRef Name="id_client" />
+            </Principal>
+            <Dependent Role="CustomModels">
+              <PropertyRef Name="id_client" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Orders__id_clien__6EF57B66">
+          <End Role="Clients" Type="Self.Clients" Multiplicity="1" />
+          <End Role="Orders" Type="Self.Orders" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Clients">
+              <PropertyRef Name="id_client" />
+            </Principal>
+            <Dependent Role="Orders">
+              <PropertyRef Name="id_client" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Orders__id_custo__70DDC3D8">
+          <End Role="CustomModels" Type="Self.CustomModels" Multiplicity="0..1" />
+          <End Role="Orders" Type="Self.Orders" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CustomModels">
+              <PropertyRef Name="id_custom_model" />
+            </Principal>
+            <Dependent Role="Orders">
+              <PropertyRef Name="id_custom_model" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Employees_Positions">
+          <End Role="Positions" Type="Self.Positions" Multiplicity="1" />
+          <End Role="Employees" Type="Self.Employees" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Positions">
+              <PropertyRef Name="id_position" />
+            </Principal>
+            <Dependent Role="Employees">
+              <PropertyRef Name="id_position" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Employees_Workshops">
+          <End Role="Workshops" Type="Self.Workshops" Multiplicity="0..1" />
+          <End Role="Employees" Type="Self.Employees" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Workshops">
+              <PropertyRef Name="id_workshop" />
+            </Principal>
+            <Dependent Role="Employees">
+              <PropertyRef Name="id_workshop" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Fittings__id_ord__1AD3FDA4">
+          <End Role="Orders" Type="Self.Orders" Multiplicity="1" />
+          <End Role="Fittings" Type="Self.Fittings" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Orders">
+              <PropertyRef Name="id_order" />
+            </Principal>
+            <Dependent Role="Fittings">
+              <PropertyRef Name="id_order" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__OrderMate__id_ma__7F2BE32F">
+          <End Role="Materials" Type="Self.Materials" Multiplicity="1" />
+          <End Role="OrderMaterials" Type="Self.OrderMaterials" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Materials">
+              <PropertyRef Name="id_material" />
+            </Principal>
+            <Dependent Role="OrderMaterials">
+              <PropertyRef Name="id_material" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Materials_TypesMaterials">
+          <End Role="TypesMaterials" Type="Self.TypesMaterials" Multiplicity="1" />
+          <End Role="Materials" Type="Self.Materials" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TypesMaterials">
+              <PropertyRef Name="id_type_material" />
+            </Principal>
+            <Dependent Role="Materials">
+              <PropertyRef Name="id_type_material" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Orders__id_model__6FE99F9F">
+          <End Role="Models" Type="Self.Models" Multiplicity="0..1" />
+          <End Role="Orders" Type="Self.Orders" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Models">
+              <PropertyRef Name="id_model" />
+            </Principal>
+            <Dependent Role="Orders">
+              <PropertyRef Name="id_model" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__OrderEmpl__id_or__04E4BC85">
+          <End Role="Orders" Type="Self.Orders" Multiplicity="1" />
+          <End Role="OrderEmployees" Type="Self.OrderEmployees" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Orders">
+              <PropertyRef Name="id_order" />
+            </Principal>
+            <Dependent Role="OrderEmployees">
+              <PropertyRef Name="id_order" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__OrderEmpl__id_ro__06CD04F7">
+          <End Role="RolesForOrders" Type="Self.RolesForOrders" Multiplicity="1" />
+          <End Role="OrderEmployees" Type="Self.OrderEmployees" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="RolesForOrders">
+              <PropertyRef Name="id_role_for_orders" />
+            </Principal>
+            <Dependent Role="OrderEmployees">
+              <PropertyRef Name="id_role_for_orders" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__OrderMate__id_or__7E37BEF6">
+          <End Role="Orders" Type="Self.Orders" Multiplicity="1" />
+          <End Role="OrderMaterials" Type="Self.OrderMaterials" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Orders">
+              <PropertyRef Name="id_order" />
+            </Principal>
+            <Dependent Role="OrderMaterials">
+              <PropertyRef Name="id_order" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Orders__id_statu__71D1E811">
+          <End Role="Statuses" Type="Self.Statuses" Multiplicity="1" />
+          <End Role="Orders" Type="Self.Orders" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Statuses">
+              <PropertyRef Name="id_status" />
+            </Principal>
+            <Dependent Role="Orders">
+              <PropertyRef Name="id_status" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__OrderStat__id_or__151B244E">
+          <End Role="Orders" Type="Self.Orders" Multiplicity="1" />
+          <End Role="OrderStatusHistory" Type="Self.OrderStatusHistory" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Orders">
+              <PropertyRef Name="id_order" />
+            </Principal>
+            <Dependent Role="OrderStatusHistory">
+              <PropertyRef Name="id_order" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Payments__id_ord__10566F31">
+          <End Role="Orders" Type="Self.Orders" Multiplicity="1" />
+          <End Role="Payments" Type="Self.Payments" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Orders">
+              <PropertyRef Name="id_order" />
+            </Principal>
+            <Dependent Role="Payments">
+              <PropertyRef Name="id_order" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__OrderStat__id_st__160F4887">
+          <End Role="Statuses" Type="Self.Statuses" Multiplicity="1" />
+          <End Role="OrderStatusHistory" Type="Self.OrderStatusHistory" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Statuses">
+              <PropertyRef Name="id_status" />
+            </Principal>
+            <Dependent Role="OrderStatusHistory">
+              <PropertyRef Name="id_status" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="ateilerEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="AccountRoles" EntityType="Self.AccountRoles" />
+          <EntitySet Name="Accounts" EntityType="Self.Accounts" />
+          <EntitySet Name="Categories" EntityType="Self.Categories" />
+          <EntitySet Name="Clients" EntityType="Self.Clients" />
+          <EntitySet Name="CustomModels" EntityType="Self.CustomModels" />
+          <EntitySet Name="Employees" EntityType="Self.Employees" />
+          <EntitySet Name="Fittings" EntityType="Self.Fittings" />
+          <EntitySet Name="Materials" EntityType="Self.Materials" />
+          <EntitySet Name="Models" EntityType="Self.Models" />
+          <EntitySet Name="OrderEmployees" EntityType="Self.OrderEmployees" />
+          <EntitySet Name="OrderMaterials" EntityType="Self.OrderMaterials" />
+          <EntitySet Name="Orders" EntityType="Self.Orders" />
+          <EntitySet Name="OrderStatusHistory" EntityType="Self.OrderStatusHistory" />
+          <EntitySet Name="Payments" EntityType="Self.Payments" />
+          <EntitySet Name="Positions" EntityType="Self.Positions" />
+          <EntitySet Name="Roles" EntityType="Self.Roles" />
+          <EntitySet Name="RolesForOrders" EntityType="Self.RolesForOrders" />
+          <EntitySet Name="Statuses" EntityType="Self.Statuses" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
+          <EntitySet Name="TypesMaterials" EntityType="Self.TypesMaterials" />
+          <EntitySet Name="Workshops" EntityType="Self.Workshops" />
+          <AssociationSet Name="FK__AccountRo__id_ac__32AB8735" Association="Self.FK__AccountRo__id_ac__32AB8735">
+            <End Role="Accounts" EntitySet="Accounts" />
+            <End Role="AccountRoles" EntitySet="AccountRoles" />
+          </AssociationSet>
+          <AssociationSet Name="FK__AccountRo__id_ro__339FAB6E" Association="Self.FK__AccountRo__id_ro__339FAB6E">
+            <End Role="Roles" EntitySet="Roles" />
+            <End Role="AccountRoles" EntitySet="AccountRoles" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Clients_Accounts" Association="Self.FK_Clients_Accounts">
+            <End Role="Accounts" EntitySet="Accounts" />
+            <End Role="Clients" EntitySet="Clients" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Clients_Accounts1" Association="Self.FK_Clients_Accounts1">
+            <End Role="Accounts" EntitySet="Accounts" />
+            <End Role="Clients" EntitySet="Clients" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Employees_Accounts" Association="Self.FK_Employees_Accounts">
+            <End Role="Accounts" EntitySet="Accounts" />
+            <End Role="Employees" EntitySet="Employees" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Models__id_categ__68487DD7" Association="Self.FK__Models__id_categ__68487DD7">
+            <End Role="Categories" EntitySet="Categories" />
+            <End Role="Models" EntitySet="Models" />
+          </AssociationSet>
+          <AssociationSet Name="FK__CustomMod__id_cl__6B24EA82" Association="Self.FK__CustomMod__id_cl__6B24EA82">
+            <End Role="Clients" EntitySet="Clients" />
+            <End Role="CustomModels" EntitySet="CustomModels" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Orders__id_clien__6EF57B66" Association="Self.FK__Orders__id_clien__6EF57B66">
+            <End Role="Clients" EntitySet="Clients" />
+            <End Role="Orders" EntitySet="Orders" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Orders__id_custo__70DDC3D8" Association="Self.FK__Orders__id_custo__70DDC3D8">
+            <End Role="CustomModels" EntitySet="CustomModels" />
+            <End Role="Orders" EntitySet="Orders" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Employees_Positions" Association="Self.FK_Employees_Positions">
+            <End Role="Positions" EntitySet="Positions" />
+            <End Role="Employees" EntitySet="Employees" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Employees_Workshops" Association="Self.FK_Employees_Workshops">
+            <End Role="Workshops" EntitySet="Workshops" />
+            <End Role="Employees" EntitySet="Employees" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Fittings__id_ord__1AD3FDA4" Association="Self.FK__Fittings__id_ord__1AD3FDA4">
+            <End Role="Orders" EntitySet="Orders" />
+            <End Role="Fittings" EntitySet="Fittings" />
+          </AssociationSet>
+          <AssociationSet Name="FK__OrderMate__id_ma__7F2BE32F" Association="Self.FK__OrderMate__id_ma__7F2BE32F">
+            <End Role="Materials" EntitySet="Materials" />
+            <End Role="OrderMaterials" EntitySet="OrderMaterials" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Materials_TypesMaterials" Association="Self.FK_Materials_TypesMaterials">
+            <End Role="TypesMaterials" EntitySet="TypesMaterials" />
+            <End Role="Materials" EntitySet="Materials" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Orders__id_model__6FE99F9F" Association="Self.FK__Orders__id_model__6FE99F9F">
+            <End Role="Models" EntitySet="Models" />
+            <End Role="Orders" EntitySet="Orders" />
+          </AssociationSet>
+          <AssociationSet Name="FK__OrderEmpl__id_or__04E4BC85" Association="Self.FK__OrderEmpl__id_or__04E4BC85">
+            <End Role="Orders" EntitySet="Orders" />
+            <End Role="OrderEmployees" EntitySet="OrderEmployees" />
+          </AssociationSet>
+          <AssociationSet Name="FK__OrderEmpl__id_ro__06CD04F7" Association="Self.FK__OrderEmpl__id_ro__06CD04F7">
+            <End Role="RolesForOrders" EntitySet="RolesForOrders" />
+            <End Role="OrderEmployees" EntitySet="OrderEmployees" />
+          </AssociationSet>
+          <AssociationSet Name="FK__OrderMate__id_or__7E37BEF6" Association="Self.FK__OrderMate__id_or__7E37BEF6">
+            <End Role="Orders" EntitySet="Orders" />
+            <End Role="OrderMaterials" EntitySet="OrderMaterials" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Orders__id_statu__71D1E811" Association="Self.FK__Orders__id_statu__71D1E811">
+            <End Role="Statuses" EntitySet="Statuses" />
+            <End Role="Orders" EntitySet="Orders" />
+          </AssociationSet>
+          <AssociationSet Name="FK__OrderStat__id_or__151B244E" Association="Self.FK__OrderStat__id_or__151B244E">
+            <End Role="Orders" EntitySet="Orders" />
+            <End Role="OrderStatusHistory" EntitySet="OrderStatusHistory" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Payments__id_ord__10566F31" Association="Self.FK__Payments__id_ord__10566F31">
+            <End Role="Orders" EntitySet="Orders" />
+            <End Role="Payments" EntitySet="Payments" />
+          </AssociationSet>
+          <AssociationSet Name="FK__OrderStat__id_st__160F4887" Association="Self.FK__OrderStat__id_st__160F4887">
+            <End Role="Statuses" EntitySet="Statuses" />
+            <End Role="OrderStatusHistory" EntitySet="OrderStatusHistory" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="Хранилище ateilerModelContainer" CdmEntityContainer="ateilerEntities">
+          <EntitySetMapping Name="AccountRoles">
+            <EntityTypeMapping TypeName="ateilerModel.AccountRoles">
+              <MappingFragment StoreEntitySet="AccountRoles">
+                <ScalarProperty Name="id_account_role" ColumnName="id_account_role" />
+                <ScalarProperty Name="id_account" ColumnName="id_account" />
+                <ScalarProperty Name="id_role" ColumnName="id_role" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Accounts">
+            <EntityTypeMapping TypeName="ateilerModel.Accounts">
+              <MappingFragment StoreEntitySet="Accounts">
+                <ScalarProperty Name="id_account" ColumnName="id_account" />
+                <ScalarProperty Name="login" ColumnName="login" />
+                <ScalarProperty Name="password_hash" ColumnName="password_hash" />
+                <ScalarProperty Name="created_at" ColumnName="created_at" />
+                <ScalarProperty Name="is_active" ColumnName="is_active" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Categories">
+            <EntityTypeMapping TypeName="ateilerModel.Categories">
+              <MappingFragment StoreEntitySet="Categories">
+                <ScalarProperty Name="id_category" ColumnName="id_category" />
+                <ScalarProperty Name="category_name" ColumnName="category_name" />
+                <ScalarProperty Name="category_description" ColumnName="category_description" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Clients">
+            <EntityTypeMapping TypeName="ateilerModel.Clients">
+              <MappingFragment StoreEntitySet="Clients">
+                <ScalarProperty Name="id_client" ColumnName="id_client" />
+                <ScalarProperty Name="id_account" ColumnName="id_account" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="surname" ColumnName="surname" />
+                <ScalarProperty Name="patronymic" ColumnName="patronymic" />
+                <ScalarProperty Name="phone_number" ColumnName="phone_number" />
+                <ScalarProperty Name="email" ColumnName="email" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CustomModels">
+            <EntityTypeMapping TypeName="ateilerModel.CustomModels">
+              <MappingFragment StoreEntitySet="CustomModels">
+                <ScalarProperty Name="id_custom_model" ColumnName="id_custom_model" />
+                <ScalarProperty Name="id_client" ColumnName="id_client" />
+                <ScalarProperty Name="description" ColumnName="description" />
+                <ScalarProperty Name="references_image" ColumnName="references_image" />
+                <ScalarProperty Name="created_at" ColumnName="created_at" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Employees">
+            <EntityTypeMapping TypeName="ateilerModel.Employees">
+              <MappingFragment StoreEntitySet="Employees">
+                <ScalarProperty Name="id_employee" ColumnName="id_employee" />
+                <ScalarProperty Name="id_account" ColumnName="id_account" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="surname" ColumnName="surname" />
+                <ScalarProperty Name="patronymic" ColumnName="patronymic" />
+                <ScalarProperty Name="phone_number" ColumnName="phone_number" />
+                <ScalarProperty Name="email" ColumnName="email" />
+                <ScalarProperty Name="id_workshop" ColumnName="id_workshop" />
+                <ScalarProperty Name="id_position" ColumnName="id_position" />
+                <ScalarProperty Name="hire_date" ColumnName="hire_date" />
+                <ScalarProperty Name="is_active" ColumnName="is_active" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Fittings">
+            <EntityTypeMapping TypeName="ateilerModel.Fittings">
+              <MappingFragment StoreEntitySet="Fittings">
+                <ScalarProperty Name="id_fitting" ColumnName="id_fitting" />
+                <ScalarProperty Name="id_order" ColumnName="id_order" />
+                <ScalarProperty Name="fitting_date" ColumnName="fitting_date" />
+                <ScalarProperty Name="notes" ColumnName="notes" />
+                <ScalarProperty Name="is_done" ColumnName="is_done" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Materials">
+            <EntityTypeMapping TypeName="ateilerModel.Materials">
+              <MappingFragment StoreEntitySet="Materials">
+                <ScalarProperty Name="id_material" ColumnName="id_material" />
+                <ScalarProperty Name="material_name" ColumnName="material_name" />
+                <ScalarProperty Name="id_type_material" ColumnName="id_type_material" />
+                <ScalarProperty Name="color" ColumnName="color" />
+                <ScalarProperty Name="strenght" ColumnName="strenght" />
+                <ScalarProperty Name="unit_of_measure" ColumnName="unit_of_measure" />
+                <ScalarProperty Name="price_per_unit" ColumnName="price_per_unit" />
+                <ScalarProperty Name="quantity_in_stock" ColumnName="quantity_in_stock" />
+                <ScalarProperty Name="image_path" ColumnName="image_path" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Models">
+            <EntityTypeMapping TypeName="ateilerModel.Models">
+              <MappingFragment StoreEntitySet="Models">
+                <ScalarProperty Name="id_model" ColumnName="id_model" />
+                <ScalarProperty Name="id_category" ColumnName="id_category" />
+                <ScalarProperty Name="model_name" ColumnName="model_name" />
+                <ScalarProperty Name="base_price" ColumnName="base_price" />
+                <ScalarProperty Name="description" ColumnName="description" />
+                <ScalarProperty Name="estimated_days" ColumnName="estimated_days" />
+                <ScalarProperty Name="image_path" ColumnName="image_path" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="OrderEmployees">
+            <EntityTypeMapping TypeName="ateilerModel.OrderEmployees">
+              <MappingFragment StoreEntitySet="OrderEmployees">
+                <ScalarProperty Name="id_order_employee" ColumnName="id_order_employee" />
+                <ScalarProperty Name="id_order" ColumnName="id_order" />
+                <ScalarProperty Name="id_employee" ColumnName="id_employee" />
+                <ScalarProperty Name="id_role_for_orders" ColumnName="id_role_for_orders" />
+                <ScalarProperty Name="is_responsible" ColumnName="is_responsible" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="OrderMaterials">
+            <EntityTypeMapping TypeName="ateilerModel.OrderMaterials">
+              <MappingFragment StoreEntitySet="OrderMaterials">
+                <ScalarProperty Name="id_order_material" ColumnName="id_order_material" />
+                <ScalarProperty Name="id_order" ColumnName="id_order" />
+                <ScalarProperty Name="id_material" ColumnName="id_material" />
+                <ScalarProperty Name="quantity" ColumnName="quantity" />
+                <ScalarProperty Name="price_at_moment" ColumnName="price_at_moment" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Orders">
+            <EntityTypeMapping TypeName="ateilerModel.Orders">
+              <MappingFragment StoreEntitySet="Orders">
+                <ScalarProperty Name="id_order" ColumnName="id_order" />
+                <ScalarProperty Name="id_client" ColumnName="id_client" />
+                <ScalarProperty Name="id_model" ColumnName="id_model" />
+                <ScalarProperty Name="id_custom_model" ColumnName="id_custom_model" />
+                <ScalarProperty Name="id_status" ColumnName="id_status" />
+                <ScalarProperty Name="created_at" ColumnName="created_at" />
+                <ScalarProperty Name="deadline" ColumnName="deadline" />
+                <ScalarProperty Name="is_urgent" ColumnName="is_urgent" />
+                <ScalarProperty Name="total_price" ColumnName="total_price" />
+                <ScalarProperty Name="notes" ColumnName="notes" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="OrderStatusHistory">
+            <EntityTypeMapping TypeName="ateilerModel.OrderStatusHistory">
+              <MappingFragment StoreEntitySet="OrderStatusHistory">
+                <ScalarProperty Name="id_history" ColumnName="id_history" />
+                <ScalarProperty Name="id_order" ColumnName="id_order" />
+                <ScalarProperty Name="id_status" ColumnName="id_status" />
+                <ScalarProperty Name="changed_at" ColumnName="changed_at" />
+                <ScalarProperty Name="id_employee" ColumnName="id_employee" />
+                <ScalarProperty Name="comment" ColumnName="comment" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Payments">
+            <EntityTypeMapping TypeName="ateilerModel.Payments">
+              <MappingFragment StoreEntitySet="Payments">
+                <ScalarProperty Name="id_payment" ColumnName="id_payment" />
+                <ScalarProperty Name="id_order" ColumnName="id_order" />
+                <ScalarProperty Name="payment_type" ColumnName="payment_type" />
+                <ScalarProperty Name="amount" ColumnName="amount" />
+                <ScalarProperty Name="payment_date" ColumnName="payment_date" />
+                <ScalarProperty Name="notes" ColumnName="notes" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Positions">
+            <EntityTypeMapping TypeName="ateilerModel.Positions">
+              <MappingFragment StoreEntitySet="Positions">
+                <ScalarProperty Name="id_position" ColumnName="id_position" />
+                <ScalarProperty Name="position_name" ColumnName="position_name" />
+                <ScalarProperty Name="salary" ColumnName="salary" />
+                <ScalarProperty Name="position_description" ColumnName="position_description" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Roles">
+            <EntityTypeMapping TypeName="ateilerModel.Roles">
+              <MappingFragment StoreEntitySet="Roles">
+                <ScalarProperty Name="id_role" ColumnName="id_role" />
+                <ScalarProperty Name="role_name" ColumnName="role_name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="RolesForOrders">
+            <EntityTypeMapping TypeName="ateilerModel.RolesForOrders">
+              <MappingFragment StoreEntitySet="RolesForOrders">
+                <ScalarProperty Name="id_role_for_orders" ColumnName="id_role_for_orders" />
+                <ScalarProperty Name="role_for_orders_name" ColumnName="role_for_orders_name" />
+                <ScalarProperty Name="description" ColumnName="description" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Statuses">
+            <EntityTypeMapping TypeName="ateilerModel.Statuses">
+              <MappingFragment StoreEntitySet="Statuses">
+                <ScalarProperty Name="id_status" ColumnName="id_status" />
+                <ScalarProperty Name="status_name" ColumnName="status_name" />
+                <ScalarProperty Name="status_description" ColumnName="status_description" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="ateilerModel.sysdiagrams">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TypesMaterials">
+            <EntityTypeMapping TypeName="ateilerModel.TypesMaterials">
+              <MappingFragment StoreEntitySet="TypesMaterials">
+                <ScalarProperty Name="id_type_material" ColumnName="id_type_material" />
+                <ScalarProperty Name="type_name" ColumnName="type_name" />
+                <ScalarProperty Name="type_description" ColumnName="type_description" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Workshops">
+            <EntityTypeMapping TypeName="ateilerModel.Workshops">
+              <MappingFragment StoreEntitySet="Workshops">
+                <ScalarProperty Name="id_workshop" ColumnName="id_workshop" />
+                <ScalarProperty Name="workshop_name" ColumnName="workshop_name" />
+                <ScalarProperty Name="description" ColumnName="description" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Нет" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
